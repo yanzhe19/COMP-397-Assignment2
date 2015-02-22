@@ -1,4 +1,4 @@
-﻿/// <reference path="jquery.js" />
+﻿/// <reference path="lib/jquery.js" />
 var playerMoney = 1000;
 var winnings = 0;
 var jackpot = 5000;
