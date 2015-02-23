@@ -15,6 +15,10 @@ var betOneBtn;
 var resetBtn;
 var powerBtn;
 
+var reel0;
+var reel1;
+var reel2;
+
 var playerMoney = 1000;
 var winnings = 0;
 var jackpot = 5000;
@@ -67,6 +71,33 @@ function createUI() {
     spinBtn.addEventListener("click", spinClick);
     spinBtn.addEventListener("mouseover", spinBtnOver);
     spinBtn.addEventListener("mouseout", spinBtnOut);
+
+    //set the initial reel image to all blanks
+    showReelResults(["Blank", "Blank", "Blank"]);
+
+    //add power button
+    powerBtn = new createjs.Bitmap("assets/images/btnPower.png");
+    game.addChild(powerBtn);
+    powerBtn.x = 60;
+    powerBtn.y = 355;
+
+    //add Reset button
+    resetBtn = new createjs.Bitmap("assets/images/btnReset.png");
+    game.addChild(resetBtn);
+    resetBtn.x = 120;
+    resetBtn.y = 355;
+
+    //add Bet one button
+    betOneBtn = new createjs.Bitmap("assets/images/btnBetOne.png");
+    game.addChild(betOneBtn);
+    betOneBtn.x = 180;
+    betOneBtn.y = 355;
+
+    //add Bet max button
+    betMaxBtn = new createjs.Bitmap("assets/images/btnBetMax.png");
+    game.addChild(betMaxBtn);
+    betMaxBtn.x = 240;
+    betMaxBtn.y = 355;
 }
 
 //main function
@@ -106,7 +137,8 @@ function spinClick() {
     }
     else if (playerBet <= playerMoney) {
         spinResult = Reels();
-        //fruits = spinResult[0] + " - " + spinResult[1] + " - " + spinResult[2];
+        fruits = spinResult[0] + " - " + spinResult[1] + " - " + spinResult[2];
+
         //function change image showed
         showReelResults(spinResult);
 
@@ -122,24 +154,26 @@ function spinClick() {
 
 //show the reel results to the canvas
 function showReelResults(spinResult) {
+    //remove image before show another set of image
+    game.removeChild(reel0, reel1, reel2);
 
-    //var reel0 = new createjs.Bitmap("assets/images/" + spinResult[0] + ".png");
-    var reel0 = new createjs.Bitmap("assets/images/" + "Banana" + ".png");
+    reel0 = new createjs.Bitmap("assets/images/" + spinResult[0] + ".png");
+    //reel0 = new createjs.Bitmap("assets/images/" + "Banana" + ".png");
     game.addChild(reel0);
-    reel0.x = 145;
-    reel0.y = 90;
+    reel0.x = 155;
+    reel0.y = 100;
 
-   // var reel1 = new createjs.Bitmap("assets/images/" + spinResult[1] + ".png");
-    var reel1 = new createjs.Bitmap("assets/images/" + "Banana" + ".png");
+    reel1 = new createjs.Bitmap("assets/images/" + spinResult[1] + ".png");
+    //reel1 = new createjs.Bitmap("assets/images/" + "Banana" + ".png");
     game.addChild(reel1);
     reel1.x = 310;
-    reel1.y = 90;
+    reel1.y = 100;
 
-    //var reel2 = new createjs.Bitmap("assets/images/" + spinResult[2] + ".png");
-    var reel2 = new createjs.Bitmap("assets/images/" + "Banana" + ".png");
+    reel2 = new createjs.Bitmap("assets/images/" + spinResult[2] + ".png");
+    //reel2 = new createjs.Bitmap("assets/images/" + "Banana" + ".png");
     game.addChild(reel2);
     reel2.x = 470;
-    reel2.y = 90;
+    reel2.y = 100;
 }
 
 /* Utility function to show Player Stats */
@@ -227,7 +261,7 @@ function showPlayerStats()
             outCome[spin] = Math.floor((Math.random() * 65) + 1);
             switch (outCome[spin]) {
                 case checkRange(outCome[spin], 1, 27):  // 41.5% probability
-                    betLine[spin] = "blank";
+                    betLine[spin] = "Blank";
                     blanks++;
                     break;
                 case checkRange(outCome[spin], 28, 37): // 15.4% probability

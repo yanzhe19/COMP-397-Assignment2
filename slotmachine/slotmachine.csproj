@@ -68,11 +68,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\images\Banana.png" />
+    <Content Include="assets\images\Bar.png" />
+    <Content Include="assets\images\Bell.png" />
+    <Content Include="assets\images\Blank.png" />
     <Content Include="assets\images\btnBetMax.png" />
     <Content Include="assets\images\btnBetOne.png" />
     <Content Include="assets\images\btnPower.png" />
     <Content Include="assets\images\btnReset.png" />
     <Content Include="assets\images\btnSpin.png" />
+    <Content Include="assets\images\Cherry.png" />
+    <Content Include="assets\images\Grapes.png" />
+    <Content Include="assets\images\Orange.png" />
+    <Content Include="assets\images\Seven.png" />
     <Content Include="assets\images\slotBody.png" />
     <Content Include="css\main.css" />
     <Content Include="index.html" />
