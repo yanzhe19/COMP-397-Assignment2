@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Slot Machine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zhe Yan's Slot Machine</title>
     <!-- CSS Section -->
     <link href="css/main.css" rel="stylesheet" />
 </head>
-<body>
+<body onload="init();">
+    <!--The slot machine will be displayed in this canvas-->
+    <canvas id="canvas" width="750" height="500"></canvas>
+
     <div>
         <h1>Slot Machine</h1>
         <div>
@@ -22,18 +26,14 @@
             </ul>
             <hr />
         </div>
-
         <div id="betEntry">
-
             <p>Place Your Bet Here</p>
             <input id="playerBet" name="points" value="10">
             <hr />
         </div>
 
-
         <button id="spinButton">Spin!</button>
     </div>
-
     <div id="result">
         <h2>Spin Result</h2>
         <hr />
@@ -44,9 +44,14 @@
         <p></p>
     </div>
 
-
     <!-- JavaScript Section -->
+
     <script src="Scripts/lib/jquery.js"></script>
+    <script src="Scripts/lib/easeljs-0.8.0.min.js"></script>
+    <script src="Scripts/lib/tweenjs-0.6.0.min.js"></script>
+    <script src="Scripts/lib/soundjs-0.6.0.min.js"></script>
+    <script src="Scripts/lib/preloadjs-0.6.0.min.js"></script>
+
     <script src="Scripts/main.js"></script>
 </body>
 </html>

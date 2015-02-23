@@ -67,6 +67,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\images\Banana.png" />
+    <Content Include="assets\images\btnBetMax.png" />
+    <Content Include="assets\images\btnBetOne.png" />
+    <Content Include="assets\images\btnPower.png" />
+    <Content Include="assets\images\btnReset.png" />
+    <Content Include="assets\images\btnSpin.png" />
+    <Content Include="assets\images\slotBody.png" />
     <Content Include="css\main.css" />
     <Content Include="index.html" />
     <Content Include="Scripts\lib\jquery.js" />
@@ -80,9 +87,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="assets\images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\lib\createjs-lib.d.ts" />
     <TypeScriptCompile Include="Scripts\lib\easeljs.d.ts" />
