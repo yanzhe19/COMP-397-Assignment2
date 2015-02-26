@@ -65,17 +65,23 @@ function createUI() {
     reelContainers[2].y = 100;
     //set the initial reel image to all blanks
     showReelResults(["Blank", "Blank", "Blank"]);
+    //spinBtn section++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //add spin button
     spinBtn = new Objects.Button("assets/images/btnSpin.png", 580, 355);
     game.addChild(spinBtn.getImage());
     //add event listener to spin button
     spinBtn.getImage().addEventListener("click", spinClick);
-    //add power button
-    powerBtn = new Objects.Button("assets/images/btnPower.png", 60, 355);
-    game.addChild(powerBtn.getImage());
+    //End of spinBtn section+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //add Reset button
     resetBtn = new Objects.Button("assets/images/btnReset.png", 120, 355);
     game.addChild(resetBtn.getImage());
+    //resetBtn click to reset all
+    resetBtn.getImage().addEventListener("click", resetAll);
+    //add power button
+    powerBtn = new Objects.Button("assets/images/btnPower.png", 60, 355);
+    game.addChild(powerBtn.getImage());
+    //add event listener to reset button
+    powerBtn.getImage().addEventListener("click", close_window);
     //add Bet one button
     betOneBtn = new Objects.Button("assets/images/btnBetOne.png", 180, 355);
     game.addChild(betOneBtn.getImage());
@@ -88,6 +94,11 @@ function main() {
     game = new createjs.Container();
     createUI();
     stage.addChild(game);
+}
+function close_window() {
+    if (confirm("Do you want to quit the game?")) {
+        close();
+    }
 }
 //function when button clicked
 function spinClick() {
@@ -110,7 +121,6 @@ function spinClick() {
         console.log(fruits);
         //function change image showed
         showReelResults(spinResult);
-        //$("div#result>p").text(fruits);
         determineWinnings();
         turn++;
         showPlayerStats();
@@ -158,6 +168,8 @@ function resetAll() {
     winNumber = 0;
     lossNumber = 0;
     winRatio = 0;
+    //set all reel image to initial status
+    showReelResults(["Blank", "Blank", "Blank"]);
 }
 /* Check to see if the player won the jackpot */
 function checkJackPot() {
