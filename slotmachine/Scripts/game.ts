@@ -1,4 +1,5 @@
-﻿// CreateJS Slotmachine typescript file
+﻿/// <reference path="objects/button.ts" />
+// CreateJS Slotmachine typescript file
 
 
 // VARIABLES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -13,11 +14,11 @@ var NUM_REELS: number = 3;
 //game objects
 var game: createjs.Container;//main game container object
 var background: createjs.Bitmap;
-var spinBtn: createjs.Bitmap;
-var betMaxBtn: createjs.Bitmap;
-var betOneBtn: createjs.Bitmap;
-var resetBtn: createjs.Bitmap;
-var powerBtn: createjs.Bitmap;
+var spinBtn: Objects.Button;
+var betMaxBtn: Objects.Button;
+var betOneBtn: Objects.Button;
+var resetBtn: Objects.Button;
+var powerBtn: Objects.Button;
 
 // GAME VARIABLES
 var playerMoney = 1000;
@@ -82,39 +83,27 @@ function createUI() {
     showReelResults(["Blank", "Blank", "Blank"]);
 
     //add spin button
-    spinBtn = new createjs.Bitmap("assets/images/btnSpin.png");
-    game.addChild(spinBtn);
-    spinBtn.x = 580;
-    spinBtn.y = 355;
+    spinBtn = new Objects.Button("assets/images/btnSpin.png", 580, 355);
+    game.addChild(spinBtn.getImage());
 
     //add event listener to spin button
-    spinBtn.addEventListener("click", spinClick);
-    spinBtn.addEventListener("mouseover", spinBtnOver);
-    spinBtn.addEventListener("mouseout", spinBtnOut);
+    spinBtn.getImage().addEventListener("click", spinClick);
 
     //add power button
-    powerBtn = new createjs.Bitmap("assets/images/btnPower.png");
-    game.addChild(powerBtn);
-    powerBtn.x = 60;
-    powerBtn.y = 355;
+    powerBtn = new Objects.Button("assets/images/btnPower.png", 60,355);
+    game.addChild(powerBtn.getImage());
 
     //add Reset button
-    resetBtn = new createjs.Bitmap("assets/images/btnReset.png");
-    game.addChild(resetBtn);
-    resetBtn.x = 120;
-    resetBtn.y = 355;
+    resetBtn = new Objects.Button("assets/images/btnReset.png",120,355);
+    game.addChild(resetBtn.getImage());
 
     //add Bet one button
-    betOneBtn = new createjs.Bitmap("assets/images/btnBetOne.png");
-    game.addChild(betOneBtn);
-    betOneBtn.x = 180;
-    betOneBtn.y = 355;
+    betOneBtn = new Objects.Button("assets/images/btnBetOne.png",180,355);
+    game.addChild(betOneBtn.getImage());
 
     //add Bet max button
-    betMaxBtn = new createjs.Bitmap("assets/images/btnBetMax.png");
-    game.addChild(betMaxBtn);
-    betMaxBtn.x = 240;
-    betMaxBtn.y = 355;
+    betMaxBtn = new Objects.Button("assets/images/btnBetMax.png",240,355);
+    game.addChild(betMaxBtn.getImage());
 }
 
 //main function
@@ -122,22 +111,6 @@ function main() {
     game = new createjs.Container();
     createUI();
     stage.addChild(game);
-}
-
-//spinbutton out function
-function spinBtnOut() {
-    spinBtn.alpha = 1; // 100% Alpha
-    console.log("Spin Button out");
-}
-
-//spin button over change alpha
-function spinBtnOver() {
-    spinBtn.alpha = 0.7;
-    console.log("Spin Button over");
-}
-
-function spinButtonOver() {
-    spinBtn.alpha = 0.7;
 }
 
 //function when button clicked
