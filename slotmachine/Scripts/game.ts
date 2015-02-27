@@ -1,6 +1,11 @@
 ﻿/// <reference path="objects/button.ts" />
 // CreateJS Slotmachine typescript file
 
+//<!--File  name: game.ts, Author's  name: Zhe Yan (300706310), 
+//    Last modified by: Zhe Yan, Date  last  Modified: 2015 - 2 - 26
+//    Program  description: this is a slotmachine game based on createjs.
+//user can play slotmachine game with this program.
+//    Revision  History: version 1.0-->
 
 // VARIABLES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 var canvas; // Reference to the HTML 5 Canvas element
@@ -62,7 +67,6 @@ function init() {
     main();
 }
 
-
 // GAMELOOP
 function gameLoop() {
     stage.update();
@@ -80,6 +84,7 @@ function createUI() {
         game.addChild(reelContainers[index]);
     }
 
+    //set position for all reel containers
     reelContainers[0].x = 155;
     reelContainers[0].y = 100;
     reelContainers[1].x = 310;
@@ -171,6 +176,7 @@ function createLabel() {
     game.addChild(creditLabel);
 }
 
+/*++++++++++++++++++++++++++++Button click event section++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 //function to quit the game when click power button
 function close_window() {
     if (confirm("Do you want to quit the game?")) {
@@ -209,17 +215,6 @@ function betMaxClick() {
     checkCredit();
 }
 
-//check if user have enough money to bet
-function checkCredit() {
-    if (playerBet > playerMoney) {
-        spinBtn.getImage().mouseEnabled = false;
-        spinBtn.getImage().alpha = 0.3;
-    } else {
-        spinBtn.getImage().mouseEnabled = true;
-        spinBtn.getImage().alpha = 1;
-    }
-}
-
 //function when spin button clicked
 function spinClick() {
     //playerBet = 5; //$("div#betEntry>input").val();
@@ -254,6 +249,18 @@ function spinClick() {
     }
     else {
         alert("Please enter a valid bet amount");
+    }
+}
+/*++++++++++++++++++++++++++++End of Button click event section++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+//check if user have enough money to bet
+function checkCredit() {
+    if (playerBet > playerMoney) {
+        spinBtn.getImage().mouseEnabled = false;
+        spinBtn.getImage().alpha = 0.3;
+    } else {
+        spinBtn.getImage().mouseEnabled = true;
+        spinBtn.getImage().alpha = 1;
     }
 }
 
@@ -332,7 +339,6 @@ function showWinMessage() {
 /* Utility function to show a loss message and reduce player money */
 function showLossMessage() {
     playerMoney -= playerBet;
-    // $("div#winOrLose>p").text("You Lost!");
     resetFruitTally();
 }
 

@@ -1,5 +1,11 @@
 ﻿module Objects {
+    //<!--File  name: Button.ts, Author's  name: Zhe Yan (300706310), 
+    //    Last modified by: Zhe Yan, Date  last  Modified: 2015 - 2 - 26
+    //    Program  description: this is a slotmachine game based on createjs.
+    //user can play slotmachine game with this program.
+    //    Revision  History: version 1.0-->
 
+    //button class, used to create button in the game.ts
     export class Button {
         //PRIVATE INSTANCE VARIABLES
         private _image: createjs.Bitmap;
@@ -41,11 +47,13 @@
 
 
         // PRIVATE EVENT HANDLERS
+        //button out event for all buttons
         private _buttonOut(event: createjs.MouseEvent): void {
             event.currentTarget.alpha = 1; // 100% Alpha 
 
         }
 
+        //button over event for all buttons
         private _buttonOver(event: createjs.MouseEvent): void {
             event.currentTarget.alpha = 0.7;
 

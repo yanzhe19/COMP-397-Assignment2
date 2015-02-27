@@ -86,7 +86,6 @@
     <Content Include="css\main.css" />
     <Content Include="index.html" />
     <Content Include="Scripts\lib\jquery.js" />
-    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\lib\easeljs-0.8.0.min.js" />
     <Content Include="Scripts\lib\preloadjs-0.6.0.min.js" />
     <Content Include="Scripts\lib\soundjs-0.6.0.min.js" />
