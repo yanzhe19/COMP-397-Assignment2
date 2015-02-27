@@ -10,17 +10,24 @@ var NUM_REELS = 3;
 //game objects
 var game; //main game container object
 var background;
+//buttons
 var spinBtn;
 var betMaxBtn;
 var betOneBtn;
+var betFiveBtn;
+var betTenBtn;
 var resetBtn;
 var powerBtn;
+//all label text
+var jackpotLabel;
+var creditLabel;
+var betLabel;
 // GAME VARIABLES
 var playerMoney = 1000;
 var winnings = 0;
 var jackpot = 5000;
 var turn = 0;
-var playerBet = 0;
+var playerBet = 5;
 var winNumber = 0;
 var lossNumber = 0;
 var spinResult;
@@ -35,6 +42,7 @@ var bars = 0;
 var bells = 0;
 var sevens = 0;
 var blanks = 0;
+/*End of variable section+++++++++++++++++++++++++++++++++++++++++++++++++*/
 // Functions Section++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function init() {
     canvas = document.getElementById("canvas");
@@ -65,13 +73,12 @@ function createUI() {
     reelContainers[2].y = 100;
     //set the initial reel image to all blanks
     showReelResults(["Blank", "Blank", "Blank"]);
-    //spinBtn section++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //Button section++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //add spin button
-    spinBtn = new Objects.Button("assets/images/btnSpin.png", 580, 355);
+    spinBtn = new Objects.Button("assets/images/btnSpin.png", 590, 355);
     game.addChild(spinBtn.getImage());
     //add event listener to spin button
     spinBtn.getImage().addEventListener("click", spinClick);
-    //End of spinBtn section+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //add Reset button
     resetBtn = new Objects.Button("assets/images/btnReset.png", 120, 355);
     game.addChild(resetBtn.getImage());
@@ -83,11 +90,28 @@ function createUI() {
     //add event listener to reset button
     powerBtn.getImage().addEventListener("click", close_window);
     //add Bet one button
-    betOneBtn = new Objects.Button("assets/images/btnBetOne.png", 180, 355);
+    betOneBtn = new Objects.Button("assets/images/btnBetOne.png", 240, 340);
     game.addChild(betOneBtn.getImage());
+    //add event listener to betOneBtn button
+    betOneBtn.getImage().addEventListener("click", betOneClick);
+    //add Bet five button
+    betFiveBtn = new Objects.Button("assets/images/btnBetFive.png", 180, 380);
+    game.addChild(betFiveBtn.getImage());
+    //add event listener to betFiveBtn button
+    betFiveBtn.getImage().addEventListener("click", betFiveClick);
+    //add Bet ten button
+    betTenBtn = new Objects.Button("assets/images/btnBetTen.png", 240, 380);
+    game.addChild(betTenBtn.getImage());
+    //add event listener to betTenBtn button
+    betTenBtn.getImage().addEventListener("click", betTenClick);
     //add Bet max button
-    betMaxBtn = new Objects.Button("assets/images/btnBetMax.png", 240, 355);
+    betMaxBtn = new Objects.Button("assets/images/btnBetMax.png", 175, 330);
     game.addChild(betMaxBtn.getImage());
+    //add event listener to betMaxBtn button
+    betMaxBtn.getImage().addEventListener("click", betMaxClick);
+    //End of Button section+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //Create all labels
+    createLabel();
 }
 //main function
 function main() {
@@ -95,14 +119,72 @@ function main() {
     createUI();
     stage.addChild(game);
 }
+//function create all label object using easejs
+function createLabel() {
+    //set the jackpot label
+    jackpotLabel = new createjs.Text(jackpot.toString(), "20px Arial", "#ffffff");
+    jackpotLabel.x = 340;
+    jackpotLabel.y = 403;
+    jackpotLabel.textBaseline = "alphabetic";
+    //set the bet label
+    betLabel = new createjs.Text(playerBet.toString(), "20px Arial", "#ffffff");
+    betLabel.x = 430;
+    betLabel.y = 403;
+    betLabel.textBaseline = "alphabetic";
+    //set the credit label
+    creditLabel = new createjs.Text(playerMoney.toString(), "20px Arial", "#ffffff");
+    creditLabel.x = 507;
+    creditLabel.y = 403;
+    creditLabel.textBaseline = "alphabetic";
+    //add all labels to the game container, so it will display in the screen
+    game.addChild(jackpotLabel);
+    game.addChild(betLabel);
+    game.addChild(creditLabel);
+}
+//function to quit the game when click power button
 function close_window() {
     if (confirm("Do you want to quit the game?")) {
         close();
     }
 }
-//function when button clicked
+//function when bet one button clicked
+function betOneClick() {
+    playerBet += 1;
+    showPlayerStats();
+    checkCredit();
+}
+//function when bet five button clicked
+function betFiveClick() {
+    playerBet += 5;
+    showPlayerStats();
+    checkCredit();
+}
+//function when bet ten button clicked
+function betTenClick() {
+    playerBet += 10;
+    showPlayerStats();
+    checkCredit();
+}
+//function when bet max button clicked
+function betMaxClick() {
+    playerBet = playerMoney;
+    showPlayerStats();
+    checkCredit();
+}
+//check if user have enough money to bet
+function checkCredit() {
+    if (playerBet > playerMoney) {
+        spinBtn.getImage().mouseEnabled = false;
+        spinBtn.getImage().alpha = 0.3;
+    }
+    else {
+        spinBtn.getImage().mouseEnabled = true;
+        spinBtn.getImage().alpha = 1;
+    }
+}
+//function when spin button clicked
 function spinClick() {
-    playerBet = 5; //$("div#betEntry>input").val();
+    //playerBet = 5; //$("div#betEntry>input").val();
     if (playerMoney == 0) {
         if (confirm("You ran out of Money! \nDo you want to play again?")) {
             resetAll();
@@ -115,15 +197,20 @@ function spinClick() {
     else if (playerBet < 0) {
         alert("All bets must be a positive $ amount.");
     }
+    else if (playerBet == 0) {
+        alert("Select how much you want to bet!");
+    }
     else if (playerBet <= playerMoney) {
         spinResult = Reels();
         fruits = spinResult[0] + " - " + spinResult[1] + " - " + spinResult[2];
-        console.log(fruits);
         //function change image showed
         showReelResults(spinResult);
         determineWinnings();
         turn++;
         showPlayerStats();
+        //show user data in console for test purpose
+        console.log(fruits);
+        console.log(jackpot, playerBet, playerMoney);
     }
     else {
         alert("Please enter a valid bet amount");
@@ -139,13 +226,12 @@ function showReelResults(spinResult) {
 }
 /* Utility function to show Player Stats */
 function showPlayerStats() {
-    //winRatio = winNumber / turn;
-    //$("#jackpot").text("Jackpot: " + jackpot);
-    //$("#playerMoney").text("Player Money: " + playerMoney);
-    //$("#playerTurn").text("Turn: " + turn);
-    //$("#playerWins").text("Wins: " + winNumber);
-    //$("#playerLosses").text("Losses: " + lossNumber);
-    //$("#playerWinRatio").text("Win Ratio: " + (winRatio * 100).toFixed(2) + "%");
+    //update jackpot text message
+    jackpotLabel.text = jackpot.toString();
+    //update bet number
+    betLabel.text = playerBet.toString();
+    //update player's credit
+    creditLabel.text = playerMoney.toString();
 }
 /* Utility function to reset all fruit tallies */
 function resetFruitTally() {
@@ -170,6 +256,10 @@ function resetAll() {
     winRatio = 0;
     //set all reel image to initial status
     showReelResults(["Blank", "Blank", "Blank"]);
+    //refresh the label text
+    showPlayerStats();
+    //refresh the spin button status
+    spinBtn.getImage().alpha = 1;
 }
 /* Check to see if the player won the jackpot */
 function checkJackPot() {

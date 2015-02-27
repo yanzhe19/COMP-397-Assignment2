@@ -71,8 +71,10 @@
     <Content Include="assets\images\Bar.png" />
     <Content Include="assets\images\Bell.png" />
     <Content Include="assets\images\Blank.png" />
+    <Content Include="assets\images\btnBetFive.png" />
     <Content Include="assets\images\btnBetMax.png" />
     <Content Include="assets\images\btnBetOne.png" />
+    <Content Include="assets\images\btnBetTen.png" />
     <Content Include="assets\images\btnPower.png" />
     <Content Include="assets\images\btnReset.png" />
     <Content Include="assets\images\btnSpin.png" />
