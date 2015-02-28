@@ -5,7 +5,7 @@
 //    Last modified by: Zhe Yan, Date  last  Modified: 2015 - 2 - 26
 //    Program  description: this is a slotmachine game based on createjs.
 //user can play slotmachine game with this program.
-//    Revision  History: version 1.0-->
+//    Revision  History: version 2.0-->
 
 // VARIABLES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 var canvas; // Reference to the HTML 5 Canvas element
@@ -243,6 +243,7 @@ function spinClick() {
         determineWinnings();
         turn++;
         showPlayerStats();
+
         //show user data in console for test purpose
         console.log(fruits);
         console.log(jackpot, playerBet, playerMoney);

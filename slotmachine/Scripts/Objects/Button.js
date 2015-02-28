@@ -1,5 +1,11 @@
 var Objects;
 (function (Objects) {
+    //<!--File  name: Button.ts, Author's  name: Zhe Yan (300706310), 
+    //    Last modified by: Zhe Yan, Date  last  Modified: 2015 - 2 - 26
+    //    Program  description: this is a slotmachine game based on createjs.
+    //    user can play slotmachine game with this program.
+    //    Revision  History: version 2.0-->
+    //button class, used to create button in the game.ts
     var Button = (function () {
         //Constructor
         function Button(path, x, y) {
@@ -28,9 +34,11 @@ var Objects;
             return this._image;
         };
         // PRIVATE EVENT HANDLERS
+        //button out event for all buttons
         Button.prototype._buttonOut = function (event) {
             event.currentTarget.alpha = 1; // 100% Alpha 
         };
+        //button over event for all buttons
         Button.prototype._buttonOver = function (event) {
             event.currentTarget.alpha = 0.7;
         };
